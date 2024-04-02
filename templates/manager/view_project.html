@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Project</title>
+    {% load static %}
+    {% include 'includes.html' %}
+    <style>
+        body{
+            font-family: 'Poppins';
+            background-image: url("{% static 'images/background_images/home-background-image-2.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid mt-3">
+        <h1>View Project</h1>
+        <div class="row">
+            <div class="col-2">
+                {% include 'manager/navbar.html' %}
+            </div>
+            <div class="col-6 offset-2 mt-3">
+                
+                
+                <div class="card border-dark">
+                    <div class="card-body">
+
+                        <h1 class="text-center">{{project.project_title}}</h1>
+                        <hr>
+                        <div class="row">
+                            <div class="col-6">
+                                <b>Project Id</b>: {{project.id}}
+                            </div>
+                            <div class="col-6">
+                                <b>Manager</b>: {{project.manager}}
+                            </div>
+                            <div class="col-6 mt-3">
+                                <b>Status</b>: {{project.status}}
+                            </div>
+                            <div class="col-6 mt-3">
+                                <b>Created At</b>: {{project.created_at}}
+                            </div> 
+                            <div class="col-12 mt-3">
+                                <b>Description</b>: {{project.description}}
+                            </div>
+                            {% if project.status == False %}
+                                <div class="col-12 mt-3 d-flex justify-content-center align-items-center">
+                                    <form action="{% url 'complete_project' project.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-success">Project Done</button>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+                
+
+                <div class="card mt-4 shadow mb-3"> 
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                {% if project.status == False %}
+                                    <button type="button" id="addTaskButton" class="bi btn bi-plus-lg float-end" data-bs-toggle="modal" data-bs-target="#taskBackdrop"></button>
+                                {% endif %}
+                                <h5><b>Tasks Assigned</b></h5>
+                                Add tasks to certain employees and make them work on the project. Then they can update their progress.
+                                <button type="button" class="bi btn bi-caret-down-fill float-end" data-bs-toggle="collapse" data-bs-target="#tasksAssigned" aria-expanded="false" aria-controls="tasksAssigned"></button> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse shadow" id="tasksAssigned">
+                    
+                    {% for t in tasks %}
+                        <div class="card mb-3 card-body">
+                            Task Name: {{t.task_name}} <br>
+                            Employee: {{t.assigned_to}} <br>
+                            Status: {{t.status}} <br>
+                        </div>
+                    {% endfor %}
+                    
+                </div>
+
+
+
+
+                <div class="modal fade" id="taskBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="taskBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-center">
+                        <div class="modal-content">
+                        <form action="{% url 'add_task' project.id %}" method="post">
+                            {% csrf_token %}
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="taskBackdropLabel">Add Task</h1>
+                                <button type="button" id='taskModalButton' class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label htmlFor="title" class="form-label">Task Title</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        name="title"
+                                        id="title"
+                                        required
+                                        aria-describedby="helpId"
+                                    />
+                                </div>
+                                <div class="mb-3">
+                                    <label htmlFor="description" class="form-label">Task Description</label>
+                                    <textarea name="description" class='form-control' id="description" rows="4"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="assigned_to" class="form-label">Employee</label>
+                                    <select
+                                        class="form-select form-select-lg"
+                                        name="assigned_to"
+                                        id="assigned_to"
+                                    >
+                                        <option selected>Select one</option>
+                                        {% for e in employees %}
+                                            <option value="{{e.id}}">{{e.username}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-danger">Upload Task</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Hide the modal by default
+            var taskModal = new bootstrap.Modal(document.getElementById('taskBackdrop'));
+            taskModal.hide();
+    
+            // Get a reference to the button
+            var addButton = document.getElementById('addTaskButton');
+    
+            // Add click event listener to the button
+            addButton.addEventListener('click', function() {
+                // Show the modal
+                taskModal.show();
+            });
+    
+            // Function to hide the modal
+            function hideModal() {
+                taskModal.hide();
+            }
+    
+            // Add event listener to close button
+            var closeButton = document.getElementById('taskModalButton');
+            closeButton.addEventListener('click', hideModal);
+        });
+    </script>
+
+    <script type="module" src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

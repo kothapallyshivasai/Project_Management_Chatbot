@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks Completed</title>
+    {% load static %}
+    {% include 'includes.html' %}
+    <style>
+        body{
+            font-family: 'Poppins';
+            background-image: url("{% static 'images/background_images/home-background-image-2.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid mt-3">
+        <h1>Tasks Completed</h1>
+        <div class="row">
+            <div class="col-2">
+                {% include 'employee/navbar.html' %}
+            </div>
+            <div class="col-10 mt-5">
+                <div class="card border-dark">
+                    <div class="card-body">
+                        <div
+                            class="table-responsive"
+                        >
+                            <table
+                                class="table table-primary"
+                            >
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Task ID</th>
+                                        <th scope="col">Task Name</th>
+                                        <th scope="col">Project</th>
+                                        <th scope="col">Manager</th>
+                                        <th scope="col">Assigned To</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in tasks %}
+                                        <tr>
+                                            <td>{{i.id}}</td>
+                                            <td>{{i.task_name}}</td>
+                                            <td>{{i.project.project_title}}</td>
+                                            <td>{{i.project.manager.username}}</td>
+                                            <td>{{i.assigned_to}}</td>
+                                            <td>{{i.status}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

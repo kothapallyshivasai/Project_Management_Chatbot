@@ -1,0 +1,71 @@
+<style>
+    .hover-animation {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hover-animation::after {
+        content: "";
+        display: block;
+        height: 4px;
+        width: 100%;
+        background-color: #2bd576;
+        transform: scale(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+
+    .hover-animation:hover::after {
+        transform: scale(1);
+    }
+
+    .navbar {
+        padding-top: 1rem;    }
+
+    .navbar-brand {
+        margin-bottom: 1rem;
+    }
+
+    .navbar-nav .nav-item {
+        margin-bottom: 0.5rem;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 0.5rem 1rem; 
+        border-bottom: 1px solid #ddd; 
+    }
+
+    .navbar-nav .nav-link:last-child {
+        border-bottom: none; 
+    }
+</style>
+
+{% load static %}
+
+<nav class="navbar">
+    <div>
+        <ul class="navbar-nav">
+            <li class="nav-item mt-2">
+                <a class="nav-link hover-animation" href="{% url 'manager_home' %}">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link hover-animation" href="{% url 'add_project' %}">Create Project</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link hover-animation" href="{% url 'view_projects' %}">Projects</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link hover-animation" href="{% url 'show_upload_projects' %}">Upload Projects</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link hover-animation" href="{% url 'view_employees' %}">View Employees</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link hover-animation" href="{% url 'add_employee' %}">Add Employees</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link hover-animation" href="{% url 'logout' %}">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Projects</title>
+    {% load static %}
+    {% include 'includes.html' %}
+    <style>
+        body{
+            font-family: 'Poppins';
+            background-image: url("{% static 'images/background_images/home-background-image-2.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid mt-3">
+        <h1>View Projects</h1>
+        <div class="row">
+            <div class="col-2">
+                {% include 'manager/navbar.html' %}
+            </div>
+            <div class="col-10 mt-5">
+                <div class="card border-dark">
+                    <div class="card-body">
+                        <div
+                            class="table-responsive"
+                        >
+                            <table
+                                class="table table-primary"
+                            >
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Project ID</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Manager</th>
+                                        <th scope="col">Created At</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in projects %}
+                                        <tr>
+                                            <td>{{i.id}}</td>
+                                            <td>{{i.project_title}}</td>
+                                            <td>{{i.description}}</td>
+                                            <td>{{i.manager.username}}</td>
+                                            <td>{{i.created_at|date:"Y-m-d"}}</td>
+                                            <td>{{i.status}}</td>
+                                            <td><a href="{% url 'view_project' i.id %}" class="btn btn-success">View</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

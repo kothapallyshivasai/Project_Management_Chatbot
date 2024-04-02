@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    {% load static %}
+    {% include 'includes.html' %}
+    <link rel="stylesheet" href="{% static 'css/default-home.css' %}">
+    <style>
+        body{
+            font-family: 'Poppins';
+            background-image: url("{% static 'images/background_images/home-background-image-2.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container mt-2">
+        {% include 'default/navbar.html' %}
+    </div>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-xl-5 col-lg-6 col-12 mt-lg-5">
+                <a class="btn btn-primary" href="{% url 'register' %}" style="border-radius: 25px;">
+                    <button style="border-radius: 25px; margin: -3px; margin-left: -8px; padding: 8px; padding-left: 19px; padding-right: 19px; color: black; background-color: white;" class="btn">
+                        New Projects 
+                    </button> 
+                    <span style="padding-left: 20px; padding-right: 25px;">Register Now <i class="bi bi-arrow-right"></i></span> 
+                </a>
+                <h1 class="mt-lg-3 mt-5"><b>The top projects in every part of the world.</b></h1>
+                <p>Streamline project management with seamless task assignment and progress tracking for managers and employees.</p>
+                <div class="row mt-5">
+                    <div class="col-6 mt-5">
+                        <img style="height: 70px; width: 70px;" src="{% static 'images/background_images/manager.png' %}" alt="Manager Icon">
+                        <b>Manager</b>
+                        <p class="mt-2">Recruits and assigns projects to employees.</p>
+                    </div>
+                    <div class="col-6 mt-5">
+                        <img style="height: 70px; width: 70px;" src="{% static 'images/background_images/employees.png' %}" alt="Employees Icon">
+                        <b>Employees</b>
+                        <p class="mt-2">Complete projects assigned by their manager.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-7 col-lg-6 col-12 mt-lg-4 mb-5 mb-lg-0">
+                <img src="{% static 'images/background_images/home-page-right-image-removebg.png' %}" alt="Image" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

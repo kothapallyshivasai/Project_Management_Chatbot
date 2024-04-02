@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Home</title>
+    {% load static %}
+    {% include 'includes.html' %}
+    <style>
+        body{
+            font-family: 'Poppins';
+            background-image: url("{% static 'images/background_images/home-background-image-2.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid mt-3">
+        <h1>Dashboard</h1>
+        <hr>
+        <h4>Welcome, {{user.username}}</h4>
+        <div class="row">
+            <div class="col-2">
+                {% include 'employee/navbar.html' %}
+            </div>
+            <div class="col-10 mt-5">
+                <div class="card border-dark">
+                    <div class="card-body">
+                        
+                        <div class="row mt-3">
+
+
+                            <div class="col-4">
+                                <div class="card bg-primary">
+                                    <div class="card-body">
+                                        <b>Create Project</b> <br>
+                                        Create a new project where you can add tasks and manage them.
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-4">
+                                <div class="card bg-primary">
+                                    <div class="card-body">
+                                        <b>Assign Tasks</b> <br>
+                                        In the existing projects check all the assigned tasks and manage them.
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-4">
+                                <div class="card bg-primary">
+                                    <div class="card-body">
+                                        <b>Check Finished Tasks</b> <br>
+                                        In the existing projects check all the tasks and manage them.
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="row mt-4">
+                            
+                            
+                            <div class="col-4">
+                                <div class="card bg-primary">
+                                    <div class="card-body">
+                                        <b>Upload Projects</b> <br>
+                                        Upload the existing projects for public view and manage them.
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-4">
+                                <div class="card bg-primary">
+                                    <div class="card-body">
+                                        <b>Add Employees</b> <br>
+                                        Add new employees to work on the project's requirements.
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-4">
+                                <div class="card bg-primary">
+                                    <div class="card-body">
+                                        <b>Chatbot</b> <br>
+                                        Have an AI Powered Chatbot which helps you with your queries.
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+manager:- Dashboard,
+ Create Project, Projects(Assign Tasks & Employee Progress), Upload Projects, Chatbot, Add Employees, Logout
+
+employee:- Dashboard, Projects(Finished Tasks, Working On, Tasks Incomplete), View Projects, Chatbot, Logout
